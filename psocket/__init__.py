@@ -26,25 +26,42 @@ class SocketClient:
         ch.setFormatter(formatter)
         self.logger.addHandler(ch)
 
+    def __str__(self):
+        return str(self.socket_response())
+
+    @property
+    def client(self):
         try:
-            self.sock = socket.create_connection((self.host, self.port))
+            return socket.create_connection((self.host, self.port))
         except ConnectionRefusedError as err:
             self.logger.error(f'Cannot establish socket connection to {self.host}:{self.port}')
             raise err
 
-    def __str__(self):
-        return str(self.socket_response())
+    def is_host_available(self, port: int = 0, timeout: int = 5) -> bool:
+        """Check remote host is available using specified port.
+
+        Port 5985 used by default
+        """
+
+        port_ = port if port else self.port
+
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+            sock.settimeout(timeout)
+            response = sock.connect_ex((self.host, port_))
+            result = False if response else True
+            self.logger.info(f'{self.host}:{self.port} is available: {result}')
+            return result
 
     def greeting(self):
-        return self.sock.recv(65536).decode().strip()
+        return self.client.recv(65536).decode().strip()
 
     def send_command(self, cmd=''):
         command = self._encode_command(cmd)
 
-        self.logger.debug('CONTROL: ' + cmd)
+        self.logger.debug('COMMAND: ' + cmd)
 
         try:
-            self.sock.send(command)
+            self.client.send(command)
             response = self.socket_response()
             self.logger.debug(response)
 
@@ -54,13 +71,13 @@ class SocketClient:
             # raise
 
     def socket_response(self):
-        data = self.sock.recv(65536).decode()
+        data = self.client.recv(65536).decode()
         response = data.strip().split('\n')
         self.logger.debug('[RESPONSE]: ' + str(response))
         return response
 
     def close_connection(self):
-        self.sock.close()
+        self.client.close()
 
     @staticmethod
     def _encode_command(cmd):
