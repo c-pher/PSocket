@@ -26,18 +26,13 @@ class SocketClient:
         ch.setFormatter(formatter)
         self.logger.addHandler(ch)
 
+        try:
+            self.client = socket.create_connection((self.host, self.port), timeout=7)
+        except ConnectionRefusedError as err:
+            self.logger.error(f'Cannot establish socket connection to {self.host}:{self.port}. {err}')
+
     def __str__(self):
         return str(self.socket_response())
-
-    @property
-    def client(self):
-        """Create socket connection within 7 sec timeout"""
-
-        try:
-            return socket.create_connection((self.host, self.port), timeout=7)
-        except ConnectionRefusedError as err:
-            self.logger.error(f'Cannot establish socket connection to {self.host}:{self.port}')
-            raise err
 
     def is_host_available(self, port: int = 0, timeout: int = 5) -> bool:
         """Check remote host is available using specified port.
