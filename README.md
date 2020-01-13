@@ -1,5 +1,10 @@
+[![PyPI version](https://badge.fury.io/py/psocket.svg)](https://badge.fury.io/py/psocket)
+[![Build Status](https://travis-ci.org/c-pher/PSocket.svg?branch=master)](https://travis-ci.org/c-pher/PSocket)
+[![Coverage Status](https://coveralls.io/repos/github/c-pher/PSocket/badge.svg?branch=master)](https://coveralls.io/github/c-pher/PSocket?branch=master)
+
+
 # PSocket
-The cross-platform simple tool to work with remote server through sockets.
+The cross-platform simple tool to work with remote server through sockets. It can establish socket connection to a remote host:port, send commands and receive response. 
 
 ## Installation
 For most users, the recommended method to install is via pip:
