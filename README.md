@@ -4,7 +4,9 @@
 
 
 # PSocket
-The cross-platform simple tool to work with remote server through sockets. It can establish socket connection to a remote host:port, send commands and receive response. 
+The cross-platform simple tool to work with remote server through sockets. 
+It can establish socket connection to a remote host:port, send commands and receive response.
+No need to send byte-string. Use usual strings to send command.
 
 ## Installation
 For most users, the recommended method to install is via pip:
@@ -29,6 +31,12 @@ from psocket import SocketClient
 
 client = SocketClient(host='172.16.0.48', port=3261)
 print(client.greeting())
+```
+```python
+from psocket import SocketClient
+
+client = SocketClient(host='172.16.0.48', port=3261)
+print(client.send_command(b''))
 ```
 
 ---
