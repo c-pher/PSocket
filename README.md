@@ -42,6 +42,9 @@ print(client.send_command(b''))
 ---
 
 ## Changelog
+##### 1.0.0a2 (13.01.2020)
+Reverted "client". Now it is attribute again to keep session alive 
+
 ##### 1.0.0a1 (13.01.2020)
 - Now connection creates with client property
 - New methods added:
