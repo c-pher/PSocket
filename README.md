@@ -36,7 +36,7 @@ print(client.greeting())
 from psocket import SocketClient
 
 client = SocketClient(host='172.16.0.48', port=3261)
-print(client.send_command(b''))
+print(client.send_command('<telnet commands>'))
 ```
 
 ---
