@@ -84,3 +84,11 @@ class SocketClient:
     @staticmethod
     def _encode_command(cmd):
         return (cmd + '\n').encode()
+
+    def get_sock_name(self) -> tuple:
+        """Get local IP and port"""
+        return self.client.getsockname()
+
+    def get_peer_name(self) -> tuple:
+        """Get remote IP and port"""
+        return self.client.getpeername()
