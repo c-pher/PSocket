@@ -29,5 +29,12 @@ print(client.greeting())
 ---
 
 ## Changelog
+##### 1.0.0a1 (13.01.2020)
+- Now connection creates with client property
+- New methods added:
+    - is_host_available() 
+    - get_sock_name()
+    - get_peer_name()
+
 ##### 1.0.0a0 (13.01.2020)
 - initial commit

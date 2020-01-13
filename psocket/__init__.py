@@ -42,7 +42,7 @@ class SocketClient:
     def is_host_available(self, port: int = 0, timeout: int = 5) -> bool:
         """Check remote host is available using specified port.
 
-        Port 5985 used by default
+        Port 0 used by default. Used port from construct is not specified.
         """
 
         port_ = port if port else self.port
