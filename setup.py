@@ -8,7 +8,7 @@ with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='psocket',
-    version='1.0.0a1',
+    version='1.0.0a2',
     packages=['psocket'],
     url='https://github.com/c-pher/PSocket.git',
     license='MIT',
