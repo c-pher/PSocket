@@ -31,8 +31,10 @@ class SocketClient:
 
     @property
     def client(self):
+        """Create socket connection within 7 sec timeout"""
+
         try:
-            return socket.create_connection((self.host, self.port))
+            return socket.create_connection((self.host, self.port), timeout=7)
         except ConnectionRefusedError as err:
             self.logger.error(f'Cannot establish socket connection to {self.host}:{self.port}')
             raise err
