@@ -30,7 +30,7 @@ from psocket import SocketClient
 from psocket import SocketClient
 
 client = SocketClient(host='172.16.0.48', port=3261)
-print(client.greeting())
+print(client)
 ```
 ```python
 from psocket import SocketClient
@@ -42,6 +42,10 @@ print(client.send_command('<commands>'))
 ---
 
 ## Changelog
+##### 1.0.0a3 (14.01.2020)
+- removed timeout from socket connection
+- greeting and socket_response now are private methods
+
 ##### 1.0.0a2 (13.01.2020)
 Reverted "client". Now it is attribute again to keep session alive 
 

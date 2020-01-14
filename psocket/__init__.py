@@ -27,12 +27,14 @@ class SocketClient:
         self.logger.addHandler(ch)
 
         try:
-            self.client = socket.create_connection((self.host, self.port), timeout=7)
+            self.client = socket.create_connection((self.host, self.port))
         except ConnectionRefusedError as err:
             self.logger.error(f'Cannot establish socket connection to {self.host}:{self.port}. {err}')
+        except socket.gaierror as err:
+            self.logger.error(f'Check host and port format. {self.host}:{self.port}. {err}')
 
     def __str__(self):
-        return str(self.socket_response())
+        return str(self._socket_response())
 
     def is_host_available(self, port: int = 0, timeout: int = 5) -> bool:
         """Check remote host is available using specified port.
@@ -49,8 +51,9 @@ class SocketClient:
             self.logger.info(f'{self.host}:{self.port} is available: {result}')
             return result
 
-    def greeting(self):
-        return self.client.recv(65536).decode().strip()
+    def _greeting(self):
+        """Works only for the first connection in all project"""
+        return self._socket_response()
 
     def send_command(self, cmd=''):
         command = self._encode_command(cmd)
@@ -59,7 +62,7 @@ class SocketClient:
 
         try:
             self.client.send(command)
-            response = self.socket_response()
+            response = self._socket_response()
             self.logger.debug(response)
 
             return response
@@ -67,7 +70,7 @@ class SocketClient:
             self.logger.error(err)
             # raise
 
-    def socket_response(self):
+    def _socket_response(self):
         data = self.client.recv(65536).decode()
         response = data.strip().split('\n')
         self.logger.debug('[RESPONSE]: ' + str(response))
