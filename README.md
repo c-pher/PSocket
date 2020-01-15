@@ -42,6 +42,12 @@ print(client.send_command('<commands>'))
 ---
 
 ## Changelog
+##### 1.0.0a4 (15.01.2020)
+- added init docstring
+- init notation changed:
+    - host is string
+    - port is integer
+
 ##### 1.0.0a3 (14.01.2020)
 - removed timeout from socket connection
 - greeting and socket_response now are private methods

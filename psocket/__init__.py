@@ -8,7 +8,7 @@ class SocketClient:
     """
 
     def __init__(self, host: str, port: int, logger_enabled: bool = True):
-        """Create and connect client to a remote host
+        """Create and connect client to a remote host.
 
         :param host: Host IP
         :param port: Port
