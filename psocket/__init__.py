@@ -7,7 +7,14 @@ class SocketClient:
     Create socket and establish connect to service using tuple host+port
     """
 
-    def __init__(self, host, port, logger_enabled: bool = True):
+    def __init__(self, host: str, port: int, logger_enabled: bool = True):
+        """Create and connect client to a remote host
+
+        :param host: Host IP
+        :param port: Port
+        :param logger_enabled: Enable/disable module logger
+        """
+
         self.host = host
         self.port = port
         self.logger_enabled = logger_enabled
